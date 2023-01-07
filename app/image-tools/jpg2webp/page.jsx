@@ -1,9 +1,11 @@
 "use client";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
+
 const page = () => {
   const [imageData, setImageData] = useState(null);
   const [convertedImageData, setConvertedImageData] = useState(null);
+
   const fileInput = useRef(null);
   const [loading, setLoading] = useState(false);
 
@@ -14,7 +16,7 @@ const page = () => {
     reader.onload = () => {
       setImageData(reader.result);
     };
-    setConvertedImageData(null)
+    setConvertedImageData(null);
   };
 
   const handleConvert = () => {
@@ -27,19 +29,26 @@ const page = () => {
       canvas.width = image.width;
       canvas.height = image.height;
       ctx.drawImage(image, 0, 0);
-      const newImageData = canvas.toDataURL(`download/png`);
+      const newImageData = canvas.toDataURL(`alltools_img/webp`);
       setConvertedImageData(newImageData);
       setLoading(false);
     };
   };
 
+  const handleDownload = () => {
+    const link = document.createElement("a");
+    link.download = "image.webp";
+    link.href = convertedImageData;
+    link.click();
+  };
+
   return (
     <>
       <h1 className="text-2xl text-opacity-50 text-gray-700 text-center mt-6">
-        Jpg To Png Converter
+        Jpg To Webp Converter
       </h1>
       <p className="text-center text-gray-500 text-opacity-50 mt-2">
-        Convert JPG to PNG online and for free. You can also convert any format
+        Convert JPG to Webp online and for free. You can also convert any format
         of image using our
         <Link href={"/image-tools"} className="text-blue-500">
           {""} Image-tools
@@ -127,7 +136,7 @@ const page = () => {
                   ></path>
                 </svg>
                 <span className={`${loading ? "hidden" : "block"}`}>
-                  Convert to PNG
+                  Convert to WEBP
                 </span>
               </button>
             </div>
@@ -136,22 +145,19 @@ const page = () => {
         <div className="w-[70%] lg:w-[50%] flex items-center justify-center bg-green-50 py-4">
           {convertedImageData && (
             <div className="w-full lg:w-2/3 my-4">
-              <a
-                className="block w-full rounded-lg shadow-lg bg-white"
-                href={convertedImageData}
-                download
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <div className="block w-full rounded-lg shadow-lg bg-white">
                 <img
                   className="w-full rounded-lg shadow-lg"
                   src={convertedImageData}
                   alt="Converted image"
                 />
-                <div className="px-4 py-2 bg-green-500 text-center mt-2">
-                  <p className="text-xl text-white font-bold">Download</p>
-                </div>
-              </a>
+              </div>
+              <div
+                className="px-4 py-2 bg-green-500 text-center mt-4 cursor-pointer"
+                onClick={handleDownload}
+              >
+                <p className="text-xl text-white font-bold">Download</p>
+              </div>
             </div>
           )}
         </div>

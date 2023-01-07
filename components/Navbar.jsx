@@ -20,10 +20,10 @@ const imageTools = [
     icon: PhotoIcon,
   },
   {
-    name: "Engagement",
-    description: "Speak directly to your customers in a more meaningful way.",
-    href: "#",
-    icon: ChevronDownIcon,
+    name: "Jpg2Webp",
+    description: "Convert image from jpg to webp format.",
+    href: "/image-tools/jpg2webp",
+    icon: PhotoIcon,
   },
   {
     name: "Security",
