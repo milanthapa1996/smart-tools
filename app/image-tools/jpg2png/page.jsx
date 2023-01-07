@@ -14,7 +14,7 @@ const page = () => {
     reader.onload = () => {
       setImageData(reader.result);
     };
-    setConvertedImageData(null)
+    setConvertedImageData(null);
   };
 
   const handleConvert = () => {
@@ -27,10 +27,17 @@ const page = () => {
       canvas.width = image.width;
       canvas.height = image.height;
       ctx.drawImage(image, 0, 0);
-      const newImageData = canvas.toDataURL(`download/png`);
+      const newImageData = canvas.toDataURL(`image/png`);
       setConvertedImageData(newImageData);
       setLoading(false);
     };
+  };
+
+  const handleDownload = () => {
+    const link = document.createElement("a");
+    link.download = "image.png";
+    link.href = convertedImageData;
+    link.click();
   };
 
   return (
@@ -44,8 +51,22 @@ const page = () => {
         <Link href={"/image-tools"} className="text-blue-500">
           {""} Image-tools
         </Link>
-        .
       </p>
+      <h1
+        className={`${
+          imageData ? "hidden" : "block"
+        } mt-24 flex flex-col lg:flex-row justify-around items-center text-opacity-50 text-gray-800 text-xl lg:text-4xl text-justify`}
+      >
+        Please upload image to proceed{" "}
+      </h1>
+
+      <h2
+        className={`${
+          imageData ? "hidden" : "block"
+        } mt-6 flex flex-col lg:flex-row justify-around items-center text-opacity-50 text-gray-700 text-sm italic`}
+      >
+        Click the bouncing icon to upload image.
+      </h2>
 
       <div className="mt-4 flex flex-col lg:flex-row justify-around items-center">
         <div className="w-full lg:w-[50%] ">
@@ -133,28 +154,25 @@ const page = () => {
             </div>
           )}
         </div>
-        <div className="w-[70%] lg:w-[50%] flex items-center justify-center bg-green-50 py-4">
-          {convertedImageData && (
+        {convertedImageData && (
+          <div className="w-[70%] lg:w-[50%] flex items-center justify-center bg-green-50 py-4">
             <div className="w-full lg:w-2/3 my-4">
-              <a
-                className="block w-full rounded-lg shadow-lg bg-white"
-                href={convertedImageData}
-                download
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <div className="block w-full rounded-lg shadow-lg bg-white">
                 <img
                   className="w-full rounded-lg shadow-lg"
                   src={convertedImageData}
                   alt="Converted image"
                 />
-                <div className="px-4 py-2 bg-green-500 text-center mt-2">
-                  <p className="text-xl text-white font-bold">Download</p>
-                </div>
-              </a>
+              </div>
+              <div
+                className="px-4 py-2 bg-green-500 text-center mt-4 cursor-pointer"
+                onClick={handleDownload}
+              >
+                <p className="text-xl text-white font-bold">Download</p>
+              </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </>
   );

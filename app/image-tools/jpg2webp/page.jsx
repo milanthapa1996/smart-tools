@@ -29,7 +29,7 @@ const page = () => {
       canvas.width = image.width;
       canvas.height = image.height;
       ctx.drawImage(image, 0, 0);
-      const newImageData = canvas.toDataURL(`alltools_img/webp`);
+      const newImageData = canvas.toDataURL(`image/webp`);
       setConvertedImageData(newImageData);
       setLoading(false);
     };
@@ -53,8 +53,23 @@ const page = () => {
         <Link href={"/image-tools"} className="text-blue-500">
           {""} Image-tools
         </Link>
-        .
       </p>
+
+      <h1
+        className={`${
+          imageData ? "hidden" : "block"
+        } mt-24 flex flex-col lg:flex-row justify-around items-center text-opacity-50 text-gray-800 text-xl lg:text-4xl text-justify`}
+      >
+        Please upload image to proceed{" "}
+      </h1>
+
+      <h2
+        className={`${
+          imageData ? "hidden" : "block"
+        } mt-6 flex flex-col lg:flex-row justify-around items-center text-opacity-50 text-gray-700 text-sm italic`}
+      >
+        Click the bouncing icon to upload image.
+      </h2>
 
       <div className="mt-4 flex flex-col lg:flex-row justify-around items-center">
         <div className="w-full lg:w-[50%] ">
@@ -142,8 +157,8 @@ const page = () => {
             </div>
           )}
         </div>
-        <div className="w-[70%] lg:w-[50%] flex items-center justify-center bg-green-50 py-4">
-          {convertedImageData && (
+        {convertedImageData && (
+          <div className="w-[70%] lg:w-[50%] flex items-center justify-center bg-green-50 py-4">
             <div className="w-full lg:w-2/3 my-4">
               <div className="block w-full rounded-lg shadow-lg bg-white">
                 <img
@@ -159,8 +174,8 @@ const page = () => {
                 <p className="text-xl text-white font-bold">Download</p>
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </>
   );

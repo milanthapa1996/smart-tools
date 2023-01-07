@@ -94,14 +94,14 @@ export default function Navbar() {
       <div className="relative z-20">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-5 sm:px-6 sm:py-4 lg:px-8 md:justify-start md:space-x-10">
           <div>
-            <a href="#" className="flex">
-              <span className="sr-only">Workflow</span>
+            <Link href="/" className="flex">
+              <span className="sr-only">Milan Thapa 1996 Tools</span>
               <img
                 className="h-8 w-auto sm:h-10"
                 src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
                 alt=""
               />
-            </a>
+            </Link>
           </div>
           <div className="-mr-2 -my-2 md:hidden">
             <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
@@ -422,7 +422,9 @@ export default function Navbar() {
                   </div>
 
                   <div className="grid gap-7 sm:grid-cols-2 sm:gap-y-8 sm:gap-x-4 mt-6">
-                    <h1 className="text-base text-indigo-600 font-semibold">Video Tools</h1>
+                    <h1 className="text-base text-indigo-600 font-semibold">
+                      Video Tools
+                    </h1>
                     {imageTools.map((item) => (
                       <Link
                         key={item.name}
@@ -438,7 +440,6 @@ export default function Navbar() {
                       </Link>
                     ))}
                   </div>
-
 
                   <div className="mt-8 text-base">
                     <Link
